@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->string('title', 100);
+            $table->text('description')->nullable();
+            $table->boolean('completed')->default(0);
+            $table->date('due_date')->nullable();
+            // creer la colonne
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
